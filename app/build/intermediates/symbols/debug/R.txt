@@ -235,6 +235,7 @@ int drawable abc_textfield_searchview_holo_light 0x7f020054
 int drawable abc_textfield_searchview_right_holo_dark 0x7f020055
 int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable ic_launcher 0x7f020057
+int id Server_view 0x7f0b003e
 int id action_bar 0x7f0b001c
 int id action_bar_activity_content 0x7f0b0000
 int id action_bar_container 0x7f0b001b
@@ -246,7 +247,7 @@ int id action_context_bar 0x7f0b001d
 int id action_menu_divider 0x7f0b0001
 int id action_menu_presenter 0x7f0b0002
 int id action_mode_close_button 0x7f0b0024
-int id action_settings 0x7f0b003d
+int id action_settings 0x7f0b003f
 int id activity_chooser_view_content 0x7f0b0025
 int id always 0x7f0b0013
 int id beginning 0x7f0b000f
@@ -290,6 +291,7 @@ int id showHome 0x7f0b000c
 int id showTitle 0x7f0b000d
 int id show_location 0x7f0b003c
 int id split_action_bar 0x7f0b001e
+int id start_broadcast 0x7f0b003d
 int id submit_area 0x7f0b0039
 int id tabMode 0x7f0b0008
 int id title 0x7f0b002b
@@ -323,7 +325,8 @@ int layout abc_search_dropdown_item_icons_2line 0x7f030015
 int layout abc_search_view 0x7f030016
 int layout abc_simple_decor 0x7f030017
 int layout activity_main 0x7f030018
-int layout support_simple_spinner_dropdown_item 0x7f030019
+int layout server 0x7f030019
+int layout support_simple_spinner_dropdown_item 0x7f03001a
 int menu main 0x7f0c0000
 int string abc_action_bar_home_description 0x7f050000
 int string abc_action_bar_up_description 0x7f050001
@@ -341,6 +344,7 @@ int string abc_shareactionprovider_share_with_application 0x7f05000c
 int string action_settings 0x7f05000d
 int string app_name 0x7f05000e
 int string hello_world 0x7f05000f
+int string server_activity 0x7f050010
 int style AppBaseTheme 0x7f080002
 int style AppTheme 0x7f080042
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f080043

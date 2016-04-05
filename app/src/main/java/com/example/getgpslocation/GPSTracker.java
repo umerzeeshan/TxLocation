@@ -20,11 +20,12 @@ public class GPSTracker extends Service implements LocationListener{
 	boolean isGPSEnabled = false;
 	boolean isNetworkEnabled = false;
 	boolean canGetLocation = false;
+    public static final String TAG = "BOOMBOOMTESTGPS";
 	
-	Location location;
+	public static Location location;
 	
-	double latitude;
-	double longitude;
+	private static double latitude;
+	private static double longitude;
 	
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
 	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
@@ -102,14 +103,14 @@ public class GPSTracker extends Service implements LocationListener{
 		}
 	}
 	
-	public double getLatitude() {
+	public final static double getLatitude() {
 		if(location != null) {
 			latitude = location.getLatitude();
 		}
 		return latitude;
 	}
-	
-	public double getLongitude() {
+
+    public final static double getLongitude() {
 		if(location != null) {
 			longitude = location.getLongitude();
 		}
@@ -149,8 +150,9 @@ public class GPSTracker extends Service implements LocationListener{
 	}
 	
 	@Override
-	public void onLocationChanged(Location arg0) {
-		// TODO Auto-generated method stub
+	public void onLocationChanged(Location location) {
+        Server.newLocationAvailable = true;
+        Log.e(TAG,"My location has changed");
 		
 	}
 

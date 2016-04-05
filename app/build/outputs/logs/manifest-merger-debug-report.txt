@@ -63,3 +63,11 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:28:17
 	android:name
 		ADDED from AndroidManifest.xml:28:27
+activity#com.example.getgpslocation.Server
+ADDED from AndroidManifest.xml:31:9
+	android:label
+		ADDED from AndroidManifest.xml:33:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:34:13
+	android:name
+		ADDED from AndroidManifest.xml:32:13

@@ -1,5 +1,7 @@
 package com.example.getgpslocation;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 public class MainActivity extends ActionBarActivity {
 
 	Button btnShowLocation;
+	Button btnStartBroadcast;
 	
 	GPSTracker gps;
 	
@@ -19,7 +22,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         
         btnShowLocation = (Button) findViewById(R.id.show_location);
-        
+
+		btnStartBroadcast = (Button) findViewById(R.id.start_broadcast);
+
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -39,5 +44,20 @@ public class MainActivity extends ActionBarActivity {
 				}
 			}
 		});
+
+        btnStartBroadcast.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                StartServer();
+            }
+        });
+
+		
+    }
+
+    public void StartServer() {
+        Intent mIntent = new Intent(MainActivity.this, Server.class);
+        MainActivity.this.startActivity(mIntent);
     }
 }
