@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +20,10 @@ public class Server extends Activity {
 
     public static final String TAG2 = "SERVERCHECK";
     public static boolean newLocationAvailable = false;
+    public static final boolean DEBUG_ENABLE = false;
+    public static final int SERVERPORT = 6000;
+    private int clientCounter = 0;
+
     private ServerSocket serverSocket;
 
     Handler updateConversationHandler;
@@ -29,7 +34,7 @@ public class Server extends Activity {
 
 
 
-    public static final int SERVERPORT = 6000;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,11 +75,13 @@ public class Server extends Activity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            while (!Thread.currentThread().isInterrupted()) {
+            //while (!Thread.currentThread().isInterrupted()) {
+            while (true) {
 
                 try {
 
                     socket = serverSocket.accept();
+                    Log.e(TAG2,"New Client Added Client number = "+ clientCounter++);
 
                     CommunicationThread commThread = new CommunicationThread(socket);
                     new Thread(commThread).start();
@@ -92,46 +99,67 @@ public class Server extends Activity {
 
         private BufferedReader input;
         private BufferedWriter output;
-        //GPSTracker gpsTracker;
+        private int counter = 0;
 
         public CommunicationThread(Socket clientSocket) {
 
             this.clientSocket = clientSocket;
 
+         }
+
+//        public void run() {
+//
+//
+//            //while (!Thread.currentThread().isInterrupted()) {
+//            while (!Thread.currentThread().isInterrupted()) {
+//
+//                try {
+//
+//                    String read = input.readLine();
+//
+//                    updateConversationHandler.post(new updateUIThread(read));
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+        public void run() {
 
             try {
-                this.output = new BufferedWriter(new OutputStreamWriter(this.clientSocket.getOutputStream()));
+
                 //this.input = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
-                if (newLocationAvailable == true)
+                while (true)
                 {
-                    newLocationAvailable = false;
-                    output.write(String.valueOf(GPSTracker.getLatitude()));
-                    output.newLine();
-                    output.write(String.valueOf(GPSTracker.getLongitude()));
-                    output.flush();
-                    //this.output = new BufferedWriter(new OutputStreamWriter(this.clientSocket.getOutputStream()));
+                    //TODO remove the fake setting of Latitude and Longitude for testing purpose
+                    if (DEBUG_ENABLE){
+                        GPSTracker.setLatitude(counter++);
+                        GPSTracker.setLongitude(counter++);
+                        newLocationAvailable = true;
+                        if (counter == 100)
+                            break;
+                    }
+                    // end of workAround
+
+                    this.output = new BufferedWriter(new OutputStreamWriter(this.clientSocket.getOutputStream()));
+
+
+                    if (newLocationAvailable == true)
+                    {
+                        // Reset the flag newLocationAvailable until new location is available on GPS
+                        newLocationAvailable = false;
+                        output.write(String.valueOf(GPSTracker.getLatitude()));
+                        output.newLine();
+                        output.write(String.valueOf(GPSTracker.getLongitude()));
+                        output.newLine();
+                        output.flush();
+                        //this.output = new BufferedWriter(new OutputStreamWriter(this.clientSocket.getOutputStream()));
+                    }
                 }
 
 
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        }
-
-        public void run() {
-
-
-            while (!Thread.currentThread().isInterrupted()) {
-
-                try {
-
-                    String read = input.readLine();
-
-                    updateConversationHandler.post(new updateUIThread(read));
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
 

@@ -117,7 +117,14 @@ public class GPSTracker extends Service implements LocationListener{
 		
 		return longitude;
 	}
-	
+
+    public static final void setLongitude(double longitudeValue){
+        longitude = longitudeValue;
+    }
+    public static final void setLatitude(double latitudeValue){
+        latitude = latitudeValue;
+    }
+
 	public boolean canGetLocation() {
 		return this.canGetLocation;
 	}
